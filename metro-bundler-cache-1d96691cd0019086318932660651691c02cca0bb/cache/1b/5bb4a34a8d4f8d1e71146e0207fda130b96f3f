@@ -18,6 +18,10 @@ var _setup = require("./src/boot/setup");
 
 var _setup2 = _interopRequireDefault(_setup);
 
+var _login = require("./src/screens/login");
+
+var _login2 = _interopRequireDefault(_login);
+
 var _splashscreen = require("./src/screens/splashscreen");
 
 var _splashscreen2 = _interopRequireDefault(_splashscreen);
@@ -61,14 +65,14 @@ var App = _wrapComponent("App")(function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.state = { loading: true };
+    _this.state = { loading: true, authenticated: false };
     return _this;
   }
 
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var response, responseJson;
+      var authenticationToken;
       return regeneratorRuntime.async(function componentDidMount$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -80,38 +84,22 @@ var App = _wrapComponent("App")(function (_React$Component) {
               }));
 
             case 2:
+              _context.next = 4;
+              return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem('@Connect:AuthToken'));
 
-              console.log('fonts loaded');
+            case 4:
+              authenticationToken = _context.sent;
 
-              _context.t0 = console;
-              _context.next = 6;
-              return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem('@Connect:tasks'));
-
-            case 6:
-              _context.t1 = _context.sent;
-
-              _context.t0.log.call(_context.t0, 'Saved Task List', _context.t1);
-
-              _context.next = 10;
-              return regeneratorRuntime.awrap(fetch('http://172.16.150.229:8011/api/v1/task-list'));
-
-            case 10:
-              response = _context.sent;
-              _context.next = 13;
-              return regeneratorRuntime.awrap(response.json());
-
-            case 13:
-              responseJson = _context.sent;
-              _context.next = 16;
-              return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem('@Connect:tasks', JSON.stringify(responseJson)));
-
-            case 16:
-
-              console.log('Task List', responseJson);
+              if (authenticationToken) {
+                this.setState({ authenticated: true });
+                console.log('authenticated, will lookup user from server later');
+              }
 
               this.setState({ loading: false });
 
-            case 18:
+              console.log('component finished mounting');
+
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -127,21 +115,28 @@ var App = _wrapComponent("App")(function (_React$Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 38
+              lineNumber: 43
             }
           },
           _react3.default.createElement(_splashscreen2.default, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 39
+              lineNumber: 44
             }
           })
         );
+      } else if (!this.state.authenticated) {
+        return _react3.default.createElement(_login2.default, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 48
+          }
+        });
       } else {
         return _react3.default.createElement(_setup2.default, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 50
           }
         });
       }

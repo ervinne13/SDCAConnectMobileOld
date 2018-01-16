@@ -1,42 +1,51 @@
 import React, { Component } from "react";
-import { ImageBackground, View, StatusBar } from "react-native";
-import { Container, Button, H3, Text } from "native-base";
-
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  Button,
+  Item,
+  Label,
+  Input,
+  Body,
+  Left,
+  Right,
+  Icon,
+  Form,
+  Text
+} from "native-base";
 import styles from "./styles";
-
-const npLogo = require("../../../assets/np-logo.png");
 
 class Login extends Component {
   render() {
     return (
-      <Container>
-        <StatusBar barStyle="light-content" />
-        <View style={styles.container}>
-          <View style={styles.logoContainer}>
-            <ImageBackground source={npLogo} style={styles.logo} />
-          </View>
-          <View
-            style={{
-              alignItems: "center",
-              marginBottom: 50,
-              backgroundColor: "transparent"
-            }}
-          >
-            <H3 style={styles.text}>This will be the login page</H3>
-            <View style={{ marginTop: 8 }} />
-          </View>
-          <View style={{ marginBottom: 80 }}>
-            <Button
-              style={{ backgroundColor: "#6FAF98", alignSelf: "center" }}
-              onPress={() => this.props.navigation.navigate("DrawerOpen")}
-            >
-              <Text>Lets Go!</Text>
-            </Button>
-          </View>
-        </View>
+      <Container style={styles.container}>
+        <Header>
+          <Body>
+            <Title>Login</Title>
+          </Body>
+          <Right />
+        </Header>
+
+        <Content>
+          <Form>
+            <Item stackedLabel>
+              <Label>Username</Label>
+              <Input />
+            </Item>
+            <Item stackedLabel last>
+              <Label>Password</Label>
+              <Input secureTextEntry />
+            </Item>
+          </Form>
+          <Button block style={{ margin: 15, marginTop: 50 }}>
+            <Text>Sign In</Text>
+          </Button>
+        </Content>
       </Container>
     );
   }
 }
 
-export default Home;
+export default Login;
