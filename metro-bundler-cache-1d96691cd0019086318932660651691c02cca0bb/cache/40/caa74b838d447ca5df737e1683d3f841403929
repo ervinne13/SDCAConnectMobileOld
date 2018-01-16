@@ -50,20 +50,34 @@ function _wrapComponent(id) {
 var Login = _wrapComponent("Login")(function (_Component) {
   _inherits(Login, _Component);
 
-  function Login() {
+  function Login(props) {
     _classCallCheck(this, Login);
 
-    return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+    _this.state = {
+      username: null,
+      password: null
+    };
+    return _this;
   }
 
   _createClass(Login, [{
+    key: "onLogin",
+    value: function onLogin() {
+      console.log(this.state.username);
+      console.log(this.state.password);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return _react3.default.createElement(
         _nativeBase.Container,
         { style: _styles2.default.container, __source: {
             fileName: _jsxFileName,
-            lineNumber: 23
+            lineNumber: 37
           }
         },
         _react3.default.createElement(
@@ -71,7 +85,7 @@ var Login = _wrapComponent("Login")(function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 24
+              lineNumber: 38
             }
           },
           _react3.default.createElement(
@@ -79,7 +93,7 @@ var Login = _wrapComponent("Login")(function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 25
+                lineNumber: 39
               }
             },
             _react3.default.createElement(
@@ -87,7 +101,7 @@ var Login = _wrapComponent("Login")(function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 26
+                  lineNumber: 40
                 }
               },
               "Login"
@@ -96,7 +110,7 @@ var Login = _wrapComponent("Login")(function (_Component) {
           _react3.default.createElement(_nativeBase.Right, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 28
+              lineNumber: 42
             }
           })
         ),
@@ -105,7 +119,7 @@ var Login = _wrapComponent("Login")(function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 31
+              lineNumber: 45
             }
           },
           _react3.default.createElement(
@@ -113,14 +127,14 @@ var Login = _wrapComponent("Login")(function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 32
+                lineNumber: 46
               }
             },
             _react3.default.createElement(
               _nativeBase.Item,
               { stackedLabel: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 33
+                  lineNumber: 47
                 }
               },
               _react3.default.createElement(
@@ -128,15 +142,16 @@ var Login = _wrapComponent("Login")(function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 34
+                    lineNumber: 48
                   }
                 },
                 "Username"
               ),
-              _react3.default.createElement(_nativeBase.Input, {
-                __source: {
+              _react3.default.createElement(_nativeBase.Input, { onChangeText: function onChangeText(text) {
+                  return _this2.setState({ username: text });
+                }, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 35
+                  lineNumber: 49
                 }
               })
             ),
@@ -144,7 +159,7 @@ var Login = _wrapComponent("Login")(function (_Component) {
               _nativeBase.Item,
               { stackedLabel: true, last: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 37
+                  lineNumber: 51
                 }
               },
               _react3.default.createElement(
@@ -152,23 +167,25 @@ var Login = _wrapComponent("Login")(function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 38
+                    lineNumber: 52
                   }
                 },
                 "Password"
               ),
-              _react3.default.createElement(_nativeBase.Input, { secureTextEntry: true, __source: {
+              _react3.default.createElement(_nativeBase.Input, { secureTextEntry: true, onChangeText: function onChangeText(text) {
+                  return _this2.setState({ password: text });
+                }, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 39
+                  lineNumber: 53
                 }
               })
             )
           ),
           _react3.default.createElement(
             _nativeBase.Button,
-            { block: true, style: { margin: 15, marginTop: 50 }, __source: {
+            { onPress: this.onLogin, block: true, style: { margin: 15, marginTop: 50 }, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 42
+                lineNumber: 56
               }
             },
             _react3.default.createElement(
@@ -176,7 +193,7 @@ var Login = _wrapComponent("Login")(function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 43
+                  lineNumber: 57
                 }
               },
               "Sign In"
