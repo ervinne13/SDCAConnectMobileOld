@@ -2,6 +2,7 @@ import React from "react";
 import Setup from "./src/boot/setup";
 import Splashscreen from "./src/screens/splashscreen";
 
+import { AsyncStorage } from "react-native";
 import { Root } from "native-base";
 
 export default class App extends React.Component {
@@ -18,9 +19,15 @@ export default class App extends React.Component {
 
     console.log('fonts loaded');
 
-    //  TODO: check for authenticated user here
+    console.log('Saved Task List', await AsyncStorage.getItem('@Connect:tasks'));
 
-    
+    //  TODO: check for authenticated user here
+    let response = await fetch('http://172.16.150.229:8011/api/v1/task-list');
+    let responseJson = await response.json();
+
+    await AsyncStorage.setItem('@Connect:tasks', JSON.stringify(responseJson));
+      
+    console.log('Task List', responseJson);
 
     this.setState({ loading: false });
   }
